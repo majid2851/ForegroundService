@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/_20sdp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv"
+        android:text="وضعیت"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_20ssp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="غیرفعال"
+        android:textColor="@color/green"
+        android:textSize="@dimen/_17ssp" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_below="@+id/status"
+        android:background="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_2sdp"/>
+
+    <Button
+        android:id="@+id/stopBtn"
+        android:textSize="@dimen/_18ssp"
+        android:text="توقف"
+        android:backgroundTint="@color/red"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/view"
+        android:layout_alignParentLeft="true"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_60sdp"/>
+    <Button
+        android:id="@+id/callMethodBtn"
+        android:textSize="@dimen/_18ssp"
+        android:text="فراخوانی"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/view"
+        android:layout_alignParentRight="true"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_60sdp"/>
+    <Button
+        android:id="@+id/startBtn"
+        android:textSize="@dimen/_18ssp"
+        android:text="شروع"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/green"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/callMethodBtn"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_60sdp"/>
+
+
+
+</RelativeLayout>
+</layout>
