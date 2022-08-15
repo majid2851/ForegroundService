@@ -11,14 +11,14 @@
 
     <TextView
         android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_50sdp"
         android:text="وضعیت"
         android:textColor="@color/black"
-        android:textSize="@dimen/_20ssp"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:textSize="@dimen/_20ssp" />
 
     <TextView
         android:id="@+id/status"
@@ -27,8 +27,8 @@
         android:layout_below="@id/tv"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_5sdp"
-        android:text="غیرفعال"
-        android:textColor="@color/green"
+        tools:text="غیرفعال"
+        tools:textColor="@color/red"
         android:textSize="@dimen/_17ssp" />
 
     <View
