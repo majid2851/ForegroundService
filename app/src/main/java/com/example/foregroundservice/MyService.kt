@@ -2,24 +2,47 @@ package com.example.foregroundservice
 
 import android.app.*
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
+import androidx.core.app.NotificationCompat
 
 
-class MyService2 : Service() {
+class  MyService() : Service() {
+
+    val ACTION_STOP_SERVICE = "STOP"
+
     val channelId = "ChannelId1"
-    private var mInstance: MyService2? = null
+    private var mInstance: MyService? = null
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
 
+//        ActionCable.createConsumer(uri)
+//        ActionCable.createConsumer("")
+
+
+        if (ACTION_STOP_SERVICE == intent.action) {
+            Log.d("mag2851", "called to cancel service")
+            stopSelf()
+        }
+        val stopSelf = Intent(this, MyService::class.java)
+
+        stopSelf.action = ACTION_STOP_SERVICE
+
+        val pStopSelf = PendingIntent.getService(this, 0, stopSelf, PendingIntent.FLAG_CANCEL_CURRENT)
         val intent1 = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent1, 0)
         var notification: Notification? = null
 
-        notification = Notification.Builder(this, channelId)
+
+
+        notification = NotificationCompat.Builder(this, channelId)
             .setContentTitle("title")
             .setContentText("text")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.drawable.ic_action_name)
+            .addAction(R.drawable.ic_close,"Close", pStopSelf)
+            .setSound(null)
             .setContentIntent(pendingIntent).build()
         startForeground(1, notification)
         return START_STICKY
@@ -42,25 +65,17 @@ class MyService2 : Service() {
         stopForeground(true)
         stopSelf()
         mInstance = null
+        MainActivity.tv.setText("غیرفعال")
+        MainActivity.tv.setTextColor(Color.RED)
         super.onDestroy()
     }
 
-    fun isServiceCreated(): Boolean {
-        return try {
-            // If instance was not cleared but the service was destroyed an Exception will be thrown
-            mInstance != null && mInstance!!.ping()
-        } catch (e: NullPointerException) {
-            // destroyed/not-started
-            false
-        }
-    }
-
-    private fun ping(): Boolean {
-        return true
-    }
 
     override fun onCreate() {
         mInstance = this
     }
 
+
 }
+
+
