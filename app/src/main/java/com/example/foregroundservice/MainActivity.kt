@@ -1,24 +1,24 @@
 package com.example.foregroundservice
 
-import android.app.PendingIntent
-import android.app.Service
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.foregroundservice.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var b:ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         b=DataBindingUtil.setContentView(this,R.layout.activity_main)
-        val myService2=MyService2()
-        val intent = Intent(this,myService2::class.java)
+        val intent = Intent(this,MyService2::class.java)
 
-        if (myService2.isServiceCreated()==true){
+        if (isMyServiceRunning(MyService2::class.java)==true){
             b.status.setText(getString(R.string.active))
             b.status.setTextColor(Color.GREEN)
         }else{
@@ -42,10 +42,14 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-    fun isRunning(serviceClass: Class<out Service?>?): Boolean {
-        val intent = Intent(this, serviceClass)
-        return PendingIntent.getService(this, 0, intent, PendingIntent.FLAG_NO_CREATE) != null
+    private fun isMyServiceRunning(serviceClass: Class<*>): Boolean {
+        val manager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                return true
+            }
+        }
+        return false
     }
 
 }

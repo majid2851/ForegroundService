@@ -11,6 +11,7 @@ class MyService2 : Service() {
     private var mInstance: MyService2? = null
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
+
         val intent1 = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent1, 0)
         var notification: Notification? = null
