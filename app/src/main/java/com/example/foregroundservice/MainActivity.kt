@@ -15,7 +15,6 @@ import com.example.foregroundservice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var b:ActivityMainBinding
-    lateinit var connection:ServiceConnection
     lateinit var myService:MyService
     companion object{
         lateinit var tv:TextView

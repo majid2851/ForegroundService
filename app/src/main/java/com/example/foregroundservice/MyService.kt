@@ -10,7 +10,7 @@ import androidx.core.app.NotificationCompat
 
 
 class  MyService() : Service() {
-
+    var pStopSelf:PendingIntent ?=null
     val ACTION_STOP_SERVICE = "STOP"
 
     val channelId = "ChannelId1"
@@ -30,9 +30,22 @@ class  MyService() : Service() {
 
         stopSelf.action = ACTION_STOP_SERVICE
 
-        val pStopSelf = PendingIntent.getService(this, 0, stopSelf, PendingIntent.FLAG_CANCEL_CURRENT)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+             pStopSelf = PendingIntent.getActivity(this, 0, stopSelf, PendingIntent.FLAG_MUTABLE)
+        } else {
+             pStopSelf = PendingIntent.getActivity(this, 0, stopSelf, PendingIntent.FLAG_CANCEL_CURRENT)
+        }
+
+
+
         val intent1 = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent1, 0)
+        var pendingIntent:PendingIntent?=null
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_MUTABLE)
+        } else {
+            pendingIntent = PendingIntent.getActivity(this, 0, intent1, 0)
+        }
         var notification: Notification? = null
 
 
