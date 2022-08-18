@@ -30,9 +30,11 @@ class  MyService() : Service() {
 
         stopSelf.action = ACTION_STOP_SERVICE
 
-        val pStopSelf = PendingIntent.getService(this, 0, stopSelf, PendingIntent.FLAG_MUTABLE)
+        val pStopSelf = PendingIntent.getService(this, 0, stopSelf, PendingIntent.FLAG_MUTABLE or
+                PendingIntent.FLAG_CANCEL_CURRENT)
         val intent1 = Intent(this, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_MUTABLE)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_MUTABLE
+        or 0)
         var notification: Notification? = null
 
 
