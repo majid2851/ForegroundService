@@ -3,9 +3,11 @@ package com.example.foregroundservice
 import android.app.*
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import android.widget.TextView
 import androidx.core.app.NotificationCompat
 
 
@@ -14,9 +16,17 @@ class  MyService() : Service() {
     val ACTION_STOP_SERVICE = "STOP"
 
     val channelId = "ChannelId1"
+
     private var mInstance: MyService? = null
+
+    companion object{
+        lateinit var mediaPlayer: MediaPlayer
+    }
+
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         createNotificationChannel()
+
+        mediaPlayer=MediaPlayer.create(application,R.raw.ringtone)
 
 //        ActionCable.createConsumer(uri)
 //        ActionCable.createConsumer("")

@@ -24,9 +24,9 @@ class MainActivity : AppCompatActivity() {
         b=DataBindingUtil.setContentView(this,R.layout.activity_main)
         tv=b.status
 
-        myService=MyService()
-       val intent = Intent(this,myService::class.java)
 
+       myService=MyService()
+       val intent = Intent(this,myService::class.java)
 
 
         if (isMyServiceRunning(myService::class.java)==true){
